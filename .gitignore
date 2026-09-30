@@ -7,5 +7,8 @@ tools/tts/models/
 __pycache__/
 *.pyc
 
+# نقشه‌ی کاری موقت ورود صدا (نهایی‌اش در voice_manifest.json ثبت می‌شود)
+tools/tts/import_map.json
+
 # فایل‌های سیستمی
 .DS_Store
