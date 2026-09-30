@@ -8,7 +8,7 @@ signal became_hungry
 
 enum State { SATISFIED, HUNGRY, EATING }
 
-const MOUTH_OFFSET: Vector2 = Vector2(168.0, 50.0)
+const MOUTH_OFFSET: Vector2 = Vector2(-130.0, -10.0)
 const EAT_SECONDS: float = 1.8
 
 var _state: State = State.SATISFIED

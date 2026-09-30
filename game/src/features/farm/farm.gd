@@ -6,8 +6,7 @@ extends Control
 ## سمت دهان گاو می‌کشد، گاو می‌خورد و تشویق می‌شود، و بعد از
 ## یک مکث کوتاه چرخه از نو آغاز می‌شود.
 
-const GROUND_RATIO: float = 0.42
-const GROUND_COLOR: Color = Color(0.45, 0.75, 0.35)
+const BACKGROUND_PATH: String = "res://assets/art/farm_background.png"
 const COW_POSITION: Vector2 = Vector2(360.0, 760.0)
 const GRASS_SPAWN_POSITION: Vector2 = Vector2(360.0, 1120.0)
 const DROP_SUCCESS_RADIUS: float = 240.0
@@ -25,8 +24,7 @@ var _feed_ask_pending: bool = false
 
 func _ready() -> void:
     mouse_filter = Control.MOUSE_FILTER_IGNORE
-    add_child(SkyBackground.new())
-    _build_ground()
+    _build_background()
 
     _cow = Cow.new()
     _cow.position = COW_POSITION
@@ -42,15 +40,13 @@ func _ready() -> void:
     _cow.mark_hungry()
 
 
-func _build_ground() -> void:
-    var ground := ColorRect.new()
-    ground.color = GROUND_COLOR
-    ground.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    ground.anchor_left = 0.0
-    ground.anchor_right = 1.0
-    ground.anchor_top = 1.0 - GROUND_RATIO
-    ground.anchor_bottom = 1.0
-    add_child(ground)
+func _build_background() -> void:
+    var background := TextureRect.new()
+    background.texture = load(BACKGROUND_PATH)
+    background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+    background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    background.set_anchors_preset(Control.PRESET_FULL_RECT)
+    add_child(background)
 
 
 func _on_cow_became_hungry() -> void:
