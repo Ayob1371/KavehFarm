@@ -1,0 +1,32 @@
+{
+    "imported_at": "2026-09-30T00:34:29.478756+00:00",
+    "source_tool": "ElevenLabs",
+    "mode": "auto",
+    "standard": "wav / 24000Hz / mono / loudnorm=I=-16:TP=-1.5:LRA=11",
+    "files": {
+        "greet_01": "greet_01.mp3",
+        "greet_02": "greet_02.mp3",
+        "greet_03": "greet_03.mp3",
+        "praise_01": "praise_01.mp3",
+        "praise_02": "praise_02.mp3",
+        "praise_03": "praise_03.mp3",
+        "praise_04": "praise_04.mp3",
+        "cow_hungry_01": "cow_hungry_01.mp3",
+        "cow_feed_ask_01": "cow_feed_ask_01.mp3",
+        "cow_feed_done_01": "cow_feed_done_01.mp3",
+        "cow_feed_done_02": "cow_feed_done_02.mp3",
+        "milk_ask_01": "milk_ask_01.mp3",
+        "milk_done_01": "milk_done_01.mp3",
+        "milk_done_02": "milk_done_02.mp3",
+        "repeat_ask_01": "repeat_ask_01.mp3",
+        "repeat_praise_01": "repeat_praise_01.mp3",
+        "repeat_praise_02": "repeat_praise_02.mp3",
+        "repeat_skip_01": "repeat_skip_01.mp3",
+        "horse_ask_01": "horse_ask_01.mp3",
+        "horse_jump_01": "horse_jump_01.mp3",
+        "horse_done_01": "horse_done_01.mp3",
+        "night_01": "night_01.mp3",
+        "night_02": "night_02.mp3",
+        "night_03": "night_03.mp3"
+    }
+}
