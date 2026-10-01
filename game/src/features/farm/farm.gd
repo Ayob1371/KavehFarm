@@ -1,29 +1,28 @@
 class_name Farm
 extends Node2D
 
-## صحنه‌ی مزرعه — دنیای بزرگ با دوربین متحرک، شخصیتِ راه‌رونده،
-## طویله‌ی گاو و مرغدانیِ هنوز بسته.
+## صحنه‌ی مزرعه — دنیای افقی بزرگ با دوربین متحرک، شخصیتِ راه‌رونده،
+## طویله‌ی گاو در بالا-راست و مرغدانیِ هنوز بسته در پایین-چپ.
 ## ورودی: لمس کوتاه = راه رفتن بازیگر؛ کشیدن انگشت = دوربین.
-## لمس طویله یا مرغدانی = ایستادن جلوی درِ آن‌ها.
 ## مأموریت گاو: دوربین خودش به طویله می‌رود و بازیگر دنبالش.
 
-const WORLD_SIZE: Vector2 = Vector2(1440.0, 2560.0)
+const WORLD_SIZE: Vector2 = Vector2(2560.0, 1440.0)
 const GROUND_PATH: String = "res://assets/art/world_ground.png"
-const GROUND_SCALE: float = 1.667
+const GROUND_SCALE: float = 2.5
 const BARN_PATH: String = "res://assets/art/barn.png"
-const BARN_SCALE: float = 0.9
+const BARN_SCALE: float = 0.75
 const COOP_PATH: String = "res://assets/art/coop.png"
 const COOP_SCALE: float = 0.5
 
-const BARN_POSITION: Vector2 = Vector2(1080.0, 520.0)
-const COOP_POSITION: Vector2 = Vector2(320.0, 2140.0)
-const COW_POSITION: Vector2 = Vector2(1080.0, 760.0)
-const PLAYER_START: Vector2 = Vector2(720.0, 1500.0)
-const HOME_POSITION: Vector2 = Vector2(720.0, 1500.0)
-const BARN_STAND_POSITION: Vector2 = Vector2(830.0, 950.0)
-const COOP_STAND_POSITION: Vector2 = Vector2(420.0, 2420.0)
-const BARN_FOCUS_POSITION: Vector2 = Vector2(950.0, 850.0)
-const FOOD_SPAWN_POSITION: Vector2 = Vector2(830.0, 1050.0)
+const BARN_POSITION: Vector2 = Vector2(2080.0, 500.0)
+const COOP_POSITION: Vector2 = Vector2(400.0, 1200.0)
+const COW_POSITION: Vector2 = Vector2(2080.0, 810.0)
+const PLAYER_START: Vector2 = Vector2(1280.0, 1000.0)
+const HOME_POSITION: Vector2 = Vector2(1280.0, 1000.0)
+const BARN_STAND_POSITION: Vector2 = Vector2(1760.0, 950.0)
+const COOP_STAND_POSITION: Vector2 = Vector2(640.0, 1330.0)
+const BARN_FOCUS_POSITION: Vector2 = Vector2(1900.0, 540.0)
+const FOOD_SPAWN_POSITION: Vector2 = Vector2(1640.0, 880.0)
 const FOOD_TEXTURE_PATH: String = "res://assets/art/cow_food.png"
 const DROP_SUCCESS_RADIUS: float = 240.0
 const BARN_TAP_RADIUS: float = 430.0

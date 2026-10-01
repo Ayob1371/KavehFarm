@@ -13,13 +13,13 @@ VoicePlayer="*res://src/core/voice/voice_player.gd"
 
 [display]
 
-window/size/viewport_width=720
-window/size/viewport_height=1280
-window/size/window_width_override=405
-window/size/window_height_override=720
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1024
+window/size/window_height_override=576
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
-window/handheld/orientation=1
+window/handheld/orientation=0
 
 [input_devices]
 
