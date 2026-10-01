@@ -5,10 +5,10 @@ extends Node2D
 ## کل ظاهر گاو همین فایل است؛ منطق در «cow.gd» جدا مانده است.
 
 const TEXTURE_PATH: String = "res://assets/art/cow.png"
-const SPRITE_SCALE: float = 0.38
-const SHADOW_OFFSET: Vector2 = Vector2(0.0, 140.0)
-const SHADOW_RX: float = 205.0
-const SHADOW_RY: float = 34.0
+const SPRITE_SCALE: float = 0.2
+const SHADOW_OFFSET: Vector2 = Vector2(0.0, 95.0)
+const SHADOW_RX: float = 130.0
+const SHADOW_RY: float = 26.0
 const SHADOW_COLOR: Color = Color(0.0, 0.0, 0.0, 0.15)
 const ELLIPSE_SEGMENTS: int = 32
 const EAT_DIP: float = 30.0
@@ -17,8 +17,8 @@ const EAT_SECONDS: float = 1.8
 const HOP_HEIGHT: float = 26.0
 const HOP_COUNT: int = 2
 const HOP_SECONDS: float = 1.4
-const SQUASH_X: float = 1.10
-const SQUASH_Y: float = 0.90
+const SQUASH_X: float = 1.1
+const SQUASH_Y: float = 0.9
 
 var _sprite: Sprite2D
 

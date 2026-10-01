@@ -8,7 +8,7 @@ signal became_hungry
 
 enum State { SATISFIED, HUNGRY, EATING }
 
-const MOUTH_OFFSET: Vector2 = Vector2(-130.0, -10.0)
+const MOUTH_OFFSET: Vector2 = Vector2(-90.0, 10.0)
 const EAT_SECONDS: float = 1.8
 
 var _state: State = State.SATISFIED
@@ -29,19 +29,19 @@ func mark_hungry() -> void:
     became_hungry.emit()
 
 
-## خوردن علف: انیمیشن جویدن و بازگشت به حالت سیر.
+## خوردن غذا: انیمیشن جویدن و بازگشت به حالت سیر.
 func start_eating() -> void:
     _state = State.EATING
     _visual.play_eating()
     get_tree().create_timer(EAT_SECONDS).timeout.connect(_on_finished_eating)
 
 
-## آیا گاو منتظر علف است؟
+## آیا گاو منتظر غذا است؟
 func is_hungry() -> bool:
     return _state == State.HUNGRY
 
 
-## مختصات جهانی دهان برای بررسی محل رها کردن علف.
+## مختصات جهانی دهان برای بررسی محل رها کردن غذا.
 func get_mouth_position() -> Vector2:
     return global_position + MOUTH_OFFSET
 
