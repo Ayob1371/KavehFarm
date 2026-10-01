@@ -6,7 +6,7 @@ extends Node2D
 
 signal arrived
 
-const SPEED: float = 430.0
+const SPEED: float = 230.0
 const STOP_DISTANCE: float = 12.0
 
 var _target: Vector2 = Vector2.ZERO

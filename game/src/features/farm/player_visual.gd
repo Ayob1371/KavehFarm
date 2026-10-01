@@ -5,15 +5,15 @@ extends Node2D
 ## هنگام راه رفتن (بالا-پایین رفتن و تکان نرم).
 
 const TEXTURE_PATH: String = "res://assets/art/player.png"
-const SPRITE_SCALE: float = 0.28
-const SPRITE_OFFSET: Vector2 = Vector2(0.0, -60.0)
-const SHADOW_RX: float = 52.0
-const SHADOW_RY: float = 14.0
+const SPRITE_SCALE: float = 0.16
+const SPRITE_OFFSET: Vector2 = Vector2(0.0, -100.0)
+const SHADOW_RX: float = 45.0
+const SHADOW_RY: float = 12.0
 const SHADOW_COLOR: Color = Color(0.0, 0.0, 0.0, 0.15)
 const ELLIPSE_SEGMENTS: int = 24
-const STEP_FREQUENCY: float = 11.0
-const STEP_HEIGHT: float = 9.0
-const STEP_TILT: float = 0.07
+const STEP_FREQUENCY: float = 8.0
+const STEP_HEIGHT: float = 16.0
+const STEP_TILT: float = 0.12
 
 var _sprite: Sprite2D
 var _walking: bool = false
