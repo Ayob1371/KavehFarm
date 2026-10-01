@@ -1,5 +1,5 @@
 {
-    "imported_at": "2026-09-30T00:34:29.478756+00:00",
+    "imported_at": "2026-10-01T00:18:57.346193+00:00",
     "source_tool": "ElevenLabs",
     "mode": "auto",
     "standard": "wav / 24000Hz / mono / loudnorm=I=-16:TP=-1.5:LRA=11",
@@ -27,6 +27,8 @@
         "horse_done_01": "horse_done_01.mp3",
         "night_01": "night_01.mp3",
         "night_02": "night_02.mp3",
-        "night_03": "night_03.mp3"
+        "night_03": "night_03.mp3",
+        "goto_barn_01": "goto_barn_01.mp3",
+        "coop_locked_01": "coop_locked_01.mp3"
     }
 }

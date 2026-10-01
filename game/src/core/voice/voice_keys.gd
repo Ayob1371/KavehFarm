@@ -11,3 +11,6 @@ const COW_HUNGRY: String = "cow_hungry_01"
 const COW_FEED_ASK: String = "cow_feed_ask_01"
 const COW_FEED_DONE_01: String = "cow_feed_done_01"
 const COW_FEED_DONE_02: String = "cow_feed_done_02"
+
+const GOTO_BARN_01: String = "goto_barn_01"
+const COOP_LOCKED_01: String = "coop_locked_01"

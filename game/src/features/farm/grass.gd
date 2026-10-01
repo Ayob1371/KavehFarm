@@ -2,10 +2,11 @@ class_name Grass
 extends Node2D
 
 ## علف کشیدنی — با لمس گرفته می‌شود، با کشیدن جابه‌جا می‌شود
-## و با رها کردن، مکان رها شدن را اعلام می‌کند.
-## چند لمس هم‌زمان پشتیبانی می‌شود تا دست کودک خطا نیندازد.
+## و با رها کردن، مکان رها شدن را در مختصات دنیا اعلام می‌کند.
+## مختصات لمس صفحه به مختصات دنیا تبدیل می‌شود تا با دوربین
+## متحرک نیز درست کار کند.
 
-signal dropped_at(position: Vector2)
+signal dropped_at(world_position: Vector2)
 
 const TEXTURE_PATH: String = "res://assets/art/grass_bundle.png"
 const SPRITE_SCALE: float = 0.35
@@ -43,6 +44,16 @@ func _input(event: InputEvent) -> void:
         _handle_mouse_motion(event)
 
 
+## آیا این علف اکنون در دست کودک است؟
+func is_grabbed() -> bool:
+    return _grabbing
+
+
+## آیا نقطه‌ای از دنیا روی این علف افت می‌کند؟
+func contains_point(world_position: Vector2) -> bool:
+    return global_position.distance_to(world_position) <= HIT_RADIUS
+
+
 ## بازگشت نرم علف به نقطه‌ی شروع پس از رها شدن ناموفق.
 func return_to_spawn(spawn_position: Vector2) -> void:
     var tween := create_tween()
@@ -65,42 +76,48 @@ func consume() -> void:
 
 
 func _handle_touch(event: InputEventScreenTouch) -> void:
+    var world: Vector2 = _screen_to_world(event.position)
     if event.pressed:
         if not _grabbing:
-            _try_grab(event.index, event.position)
+            _try_grab(event.index, world)
     elif _grabbing and event.index == _active_pointer:
-        _release(event.position)
+        _release(world)
 
 
 func _handle_drag(event: InputEventScreenDrag) -> void:
     if _grabbing and event.index == _active_pointer:
-        position = event.position
+        position = _screen_to_world(event.position)
 
 
 func _handle_mouse_button(event: InputEventMouseButton) -> void:
     if event.button_index != MOUSE_BUTTON_LEFT:
         return
+    var world: Vector2 = _screen_to_world(event.position)
     if event.pressed:
         if not _grabbing:
-            _try_grab(MOUSE_POINTER, event.position)
+            _try_grab(MOUSE_POINTER, world)
     elif _grabbing and _active_pointer == MOUSE_POINTER:
-        _release(event.position)
+        _release(world)
 
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
     if _grabbing and _active_pointer == MOUSE_POINTER:
-        position = event.position
+        position = _screen_to_world(event.position)
 
 
-func _try_grab(pointer: int, touch_position: Vector2) -> void:
-    if global_position.distance_to(touch_position) <= HIT_RADIUS:
+func _try_grab(pointer: int, world_position: Vector2) -> void:
+    if global_position.distance_to(world_position) <= HIT_RADIUS:
         _grabbing = true
         _active_pointer = pointer
         scale = Vector2(GRAB_SCALE, GRAB_SCALE)
 
 
-func _release(touch_position: Vector2) -> void:
+func _release(world_position: Vector2) -> void:
     _grabbing = false
     _active_pointer = MOUSE_POINTER
     scale = Vector2(NORMAL_SCALE, NORMAL_SCALE)
-    dropped_at.emit(touch_position)
+    dropped_at.emit(world_position)
+
+
+func _screen_to_world(screen_position: Vector2) -> Vector2:
+    return get_viewport().get_canvas_transform().affine_inverse() * screen_position
