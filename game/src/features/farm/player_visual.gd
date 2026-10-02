@@ -1,8 +1,8 @@
 class_name PlayerVisual
 extends Node2D
 
-## نمایش شخصیت بازیگر: اسپرایت، سایه‌ی نرم، و حرکت بدن
-## هنگام راه رفتن (بالا-پایین رفتن و تکان نرم).
+## نمایش شخصیت بازیگر: اسپرایت، سایه، و دو پای متحرک زیر بدن
+## تا راه رفتن واقعاً «قدم زدن» دیده شود، نه پرش.
 
 const TEXTURE_PATH: String = "res://assets/art/player.png"
 const SPRITE_SCALE: float = 0.16
@@ -11,9 +11,13 @@ const SHADOW_RX: float = 45.0
 const SHADOW_RY: float = 12.0
 const SHADOW_COLOR: Color = Color(0.0, 0.0, 0.0, 0.15)
 const ELLIPSE_SEGMENTS: int = 24
-const STEP_FREQUENCY: float = 8.0
-const STEP_HEIGHT: float = 16.0
-const STEP_TILT: float = 0.12
+const BOUNCE_HEIGHT: float = 6.0
+const BOUNCE_FREQUENCY: float = 8.0
+const LEG_COLOR: Color = Color(0.35, 0.45, 0.75)
+const LEG_RADIUS: float = 11.0
+const LEG_CENTER_X: float = 16.0
+const LEG_LIFT: float = 14.0
+const LEG_BASE_Y: float = -12.0
 
 var _sprite: Sprite2D
 var _walking: bool = false
@@ -33,9 +37,17 @@ func _process(delta: float) -> void:
         return
     _time += delta
     _sprite.position.y = (
-        SPRITE_OFFSET.y - absf(sin(_time * STEP_FREQUENCY)) * STEP_HEIGHT
+        SPRITE_OFFSET.y - absf(sin(_time * BOUNCE_FREQUENCY)) * BOUNCE_HEIGHT
     )
-    _sprite.rotation = sin(_time * STEP_FREQUENCY) * STEP_TILT
+    queue_redraw()
+
+
+func _draw() -> void:
+    _draw_ellipse(Vector2.ZERO, SHADOW_RX, SHADOW_RY, SHADOW_COLOR)
+    if _walking:
+        _draw_walking_legs()
+    else:
+        _draw_standing_legs()
 
 
 ## تنظیم جهت نمایش بر اساس مؤلفه‌ی افقی حرکت.
@@ -45,17 +57,32 @@ func face_direction(direction_x: float) -> void:
 
 
 func play_walk() -> void:
-    _walking = true
+    if not _walking:
+        _walking = true
+        _time = 0.0
+        queue_redraw()
 
 
 func play_idle() -> void:
     _walking = false
     _sprite.position.y = SPRITE_OFFSET.y
     _sprite.rotation = 0.0
+    queue_redraw()
 
 
-func _draw() -> void:
-    _draw_ellipse(Vector2.ZERO, SHADOW_RX, SHADOW_RY, SHADOW_COLOR)
+func _draw_standing_legs() -> void:
+    _draw_leg(Vector2(-LEG_CENTER_X, LEG_BASE_Y))
+    _draw_leg(Vector2(LEG_CENTER_X, LEG_BASE_Y))
+
+
+func _draw_walking_legs() -> void:
+    var phase: float = sin(_time * BOUNCE_FREQUENCY * 2.0)
+    _draw_leg(Vector2(-LEG_CENTER_X + phase * LEG_LIFT * 0.5, LEG_BASE_Y - maxf(phase, 0.0) * LEG_LIFT))
+    _draw_leg(Vector2(LEG_CENTER_X - phase * LEG_LIFT * 0.5, LEG_BASE_Y - maxf(-phase, 0.0) * LEG_LIFT))
+
+
+func _draw_leg(center: Vector2) -> void:
+    draw_circle(center, LEG_RADIUS, LEG_COLOR)
 
 
 func _draw_ellipse(
