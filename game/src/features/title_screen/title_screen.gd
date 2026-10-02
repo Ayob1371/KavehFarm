@@ -4,6 +4,8 @@ extends Control
 ## صحنه‌ی ورودی بازی: آسمان، عنوان «مزرعه کاوه» و صدای خوش‌آمد.
 ## پس از پایان خوش‌آمد، راهنمای چشمک‌زن ظاهر می‌شود و هر لمس،
 ## کودک را به صحنه‌ی مزرعه می‌برد.
+## در مرورگر ممکن است پخش صدا تا نخستین لمس مسدود شود؛
+## یک زمان‌سنج پشتیبان هم راهنما را ظاهر می‌کند.
 
 const FARM_SCENE_PATH: String = "res://src/features/farm/farm.tscn"
 const START_HINT_TEXT: String = "برای شروع، صفحه را لمس کن"
@@ -12,6 +14,7 @@ const START_HINT_ANCHOR_Y: float = 0.70
 const START_HINT_HEIGHT: float = 120.0
 const PULSE_ALPHA_MIN: float = 0.3
 const PULSE_SECONDS: float = 0.7
+const VOICE_FALLBACK_SECONDS: float = 6.0
 
 var _start_hint: FarsiLabel
 var _can_start: bool = false
@@ -40,6 +43,9 @@ func _ready() -> void:
     _start_hint.visible = false
     add_child(_start_hint)
 
+    var fallback := get_tree().create_timer(VOICE_FALLBACK_SECONDS)
+    fallback.timeout.connect(_show_start_hint)
+
     var started: bool = VoicePlayer.play_line(VoiceKeys.WELCOME)
     if started:
         VoicePlayer.line_finished.connect(_on_voice_line_finished)
@@ -63,6 +69,8 @@ func _on_voice_line_finished() -> void:
 
 
 func _show_start_hint() -> void:
+    if _can_start:
+        return
     _can_start = true
     _start_hint.visible = true
     var pulse := create_tween().set_loops()
